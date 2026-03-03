@@ -11,7 +11,7 @@ int main()
     {
         printf("Enter the %d. grades\n",i+1);
         scanf("%d", &array[i]);
-        if (array[i] > 100)
+        if ( array[i] < 0 || array[i] > 100)  // The grade must be 100 maximum and be 0 minimum
         {
             printf("invalid exam grades!");
             return 1;
@@ -30,12 +30,15 @@ int main()
 }
 
 void sort(int *arr,int n)
-{
+{   
+    /* Starting with each element, the smallest was found and written down in order from start to finish. 
+    Thus, it was arranged within the sequence.*/
+
     for (int i = 0; i < n;i++)
     {
         int min = arr[i];
         int index = i;
-        for (int j = i; j < n;j++)
+        for (int j = i + 1; j < n;j++)
         {
             if (min > arr[j])
             {
@@ -59,5 +62,5 @@ void takeaverage(int *arr, int n)
     }
     float average = (float)sum / n;
 
-    printf("The average is %0.2f\n",average);
+    printf("\nThe average is %0.2f\n",average);
 }
