@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+void createMatrix(int **array, int n);
 void TurnLeft(int **array, int n);
 void TurnRight(int **array, int n);
 
@@ -9,8 +10,8 @@ int main()
     printf("Enter the size of square matrix:");
     scanf("%d", &n);
 
-    int **array = malloc(sizeof(int*) * n);
-    if (array == NULL)
+    int **array = malloc(sizeof(int*) * n); // Dynamic memory management is important for memory space and speed
+    if (array == NULL) // Check Errors
         return 1;
 
     for (int i = 0; i < n;i++)
@@ -24,15 +25,10 @@ int main()
             return 1;
         }
     }
-    for (int i = 0; i < n;i++)
-    {
-        for (int j = 0; j < n;j++)
-        {
-            printf("Enter the %d. row %d. column element:",i,j);
-            scanf("%d", &array[i][j]);
-        }
-    }
+
+    createMatrix(array, n);
     TurnLeft(array, n);
+    printf("\n");
     TurnRight(array, n);
 
     for (int i = 0; i < n;i++)
@@ -44,6 +40,19 @@ int main()
     return 0;
 }
 
+void createMatrix(int **array,int n)
+{
+    int count = 1;
+    for (int i = 0; i < n;i++)
+    {
+        for (int j = 0; j < n;j++)
+        {
+            array[i][j] = count;
+            count++;
+        }
+    }
+}
+
 void TurnLeft(int **array, int n)
 {
     int newarray[n][n];
@@ -52,10 +61,11 @@ void TurnLeft(int **array, int n)
     {
         for (int j = n - 1; j >= 0;j--)
         {
-            newarray[n - 1 - j][i] = array[i][j];
+            newarray[n - 1 - j][i] = array[i][j]; // is done to place each line in the column, starting from the left
         }
     }
 
+    printf("The matrix rotated to the left\n");
     for (int i = 0; i < n;i++)
     {
         for (int j = 0; j < n;j++)
@@ -75,10 +85,11 @@ void TurnRight(int **array, int n)
     {
         for (int j = 0; j < n;j++)
         {
-            newarray[j][n-1-i] = array[i][j];
+            newarray[j][n-1-i] = array[i][j]; // is done to place each line in the column, starting from the right
         }
     }
 
+    printf("The matrix rotated to the right\n");
     for (int i = 0; i < n;i++)
     {
         for (int j = 0; j < n;j++)
@@ -89,4 +100,3 @@ void TurnRight(int **array, int n)
         printf("\n");
     }
 }
-
