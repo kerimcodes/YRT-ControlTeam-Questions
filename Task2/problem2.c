@@ -48,10 +48,10 @@ int main()
 }
 
 int **applyConvolution(int **imageMatrix,int imagematrixRow,int imageMatrixColumn,int **filterMatrix,int filterMatrixSize)
-{
-    const int row = (imagematrixRow - filterMatrixSize + 1);
+{   
+    const int row = (imagematrixRow - filterMatrixSize + 1); // Simplifying the code by using constant values
     const int column = (imageMatrixColumn - filterMatrixSize + 1);
-    int **filteredMatrix = malloc(sizeof(int *) * row);
+    int **filteredMatrix = malloc(sizeof(int *) * row); 
     if (filteredMatrix == NULL)
         return NULL;
 
@@ -65,18 +65,19 @@ int **applyConvolution(int **imageMatrix,int imagematrixRow,int imageMatrixColum
         }
     }
 
+    // summation for the denominator
     int sumofFilterMatrix = 0;
-    for (int i = 0; i < filterMatrixSize;i++)
+    for (int i = 0; i < filterMatrixSize;i++)  
     {
         for (int j = 0; j < filterMatrixSize;j++)
         {
             sumofFilterMatrix += filterMatrix[i][j];
         }
     }
-    
+    // for zero division error 
     if (sumofFilterMatrix == 0)
         return NULL;
-    
+    // convolution process
     for (int i = 0; i < row; i++)
     {
         for (int j = 0; j < column; j++)
@@ -160,7 +161,7 @@ void printMatrix(int **matrix, int row, int column)
 }
 
 void deleteMatrix(int **matrix, int row)
-{
+{   
     for (int i = 0; i < row;i++)
     {
         free(matrix[i]);
