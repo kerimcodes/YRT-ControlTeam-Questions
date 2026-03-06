@@ -11,6 +11,8 @@ int main()
     scanf("%d", &n);
     
     int **array = createSquareMatrix(n);
+    if (array == NULL)
+        return 1;
     TurnLeft(array, n);
     printf("\n");
     TurnRight(array, n);
